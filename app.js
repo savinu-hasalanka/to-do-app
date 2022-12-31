@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 const items = [];
+const workItems = [];
 
 app.get("/", (req, res) => {
     const options = {
@@ -21,14 +22,23 @@ app.get("/", (req, res) => {
     const today = new Date();
     const day = today.toLocaleDateString("us-en", options);
 
-    res.render("list", {kindOfDay: day, items: items});
+    res.render("list", {listTitle: day, items: items});
+});
+
+app.get("/work", (req, res) => {
+    res.render("list", {listTitle: "Work", items: workItems});
 });
 
 app.post("/", (req, res) => {
     const item = req.body.newItem;
-    items.push(item);
 
-    res.redirect("/");
+    if (req.body.button === "Work") {
+        workItems.push(item);
+        res.redirect("/work");
+    } else {
+        items.push(item);
+        res.redirect("/");
+    }
 });
 
 
