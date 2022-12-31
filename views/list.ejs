@@ -5,24 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1> <%= kindOfDay %> </h1>
+    <div class="box" id="heading">
+        <h1> <%= kindOfDay %> </h1>
+    </div>
 
-    <ul>
-        <li>Buy Food</li>
-        <li>Cook Food</li>
-        <li>Eat Food</li>
-
+    <div class="box">
         <% items.forEach((item) => { %>
-            <li><%= item %></li>
-        <% }); %>
+            <div class="item">
+                <input type="checkbox">
+                <p><%= item %></p>
+            </div>
+        <% }); %>  
 
-        <form action="/" method="post">
-            <input type="text" name="newItem">
-            <button type="submit"> ADD </button>
+        <form class="item" action="/" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+            <button type="submit"> + </button>
         </form>
-    </ul>
-
+    </div>
+    
 </body>
 </html>
